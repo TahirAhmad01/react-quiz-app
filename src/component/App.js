@@ -1,5 +1,13 @@
+import "../styles/style.css";
+import Layout from "./layout";
+import Home from "./pages/home";
+
 function App() {
-  return <div className="App">Hello this is my first project</div>;
+  return (
+    <Layout>
+      <Home />
+    </Layout>
+  );
 }
 
 export default App;

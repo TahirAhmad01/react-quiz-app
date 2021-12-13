@@ -1,5 +1,5 @@
-import image from "../../assests/images/3.jpg";
-import classes from "../../styles/video.module.css";
+import image from "../assests/images/3.jpg";
+import classes from "../styles/video.module.css";
 export default function Video() {
   return (
     <a href="quiz.html">

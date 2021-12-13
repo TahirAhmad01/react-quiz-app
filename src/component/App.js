@@ -1,11 +1,13 @@
 import "../styles/style.css";
 import Layout from "./layout";
-import Home from "./pages/home";
+import Signup from "./pages/signup";
 
 function App() {
   return (
     <Layout>
-      <Home />
+      {/* <Home /> */}
+      <Signup />
+      {/* <Login /> */}
     </Layout>
   );
 }

@@ -1,4 +1,4 @@
-import classes from "../../styles/videos.module.css";
+import classes from "../styles/videos.module.css";
 import Video from "./video";
 
 export default function Videos() {

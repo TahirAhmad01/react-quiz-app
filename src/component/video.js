@@ -2,7 +2,7 @@ import image from "../assests/images/3.jpg";
 import classes from "../styles/video.module.css";
 export default function Video() {
   return (
-    <a href="quiz.html">
+    <a href="quiz">
       <div className={classes.video}>
         <img src={image} alt="" />
         <p>#23 React Hooks Bangla - React useReducer hook Bangla</p>

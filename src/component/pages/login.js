@@ -27,7 +27,9 @@ export default function Login() {
             icon="lock"
           ></TextInput>
 
-          <Button>Submit Now</Button>
+          <Button>
+            <span>Submit Now</span>
+          </Button>
         </Form>
       </div>
     </>

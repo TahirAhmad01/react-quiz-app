@@ -7,6 +7,8 @@ import Login from "./pages/login";
 import Quiz from "./pages/quiz";
 import Result from "./pages/result";
 import Signup from "./pages/signup";
+import PrivetRoute from "./PrivetRoute";
+import PublicRoute from "./PublicRoute";
 
 function App() {
 	return (
@@ -18,21 +20,21 @@ function App() {
 							<Home />
 						</Route>
 
-						<Route exact path="/login">
+						<PublicRoute exact path="/login">
 							<Login />
-						</Route>
+						</PublicRoute>
 
-						<Route exact path="/signup">
+						<PublicRoute exact path="/signup">
 							<Signup />
-						</Route>
+						</PublicRoute>
 
-						<Route exact path="/quiz">
+						<PrivetRoute exact path="/quiz">
 							<Quiz />
-						</Route>
+						</PrivetRoute>
 
-						<Route exact path="/result">
+						<PrivetRoute exact path="/result">
 							<Result />
-						</Route>
+						</PrivetRoute>
 					</Switch>
 				</Layout>
 			</AuthProvider>

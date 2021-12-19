@@ -15,7 +15,7 @@ export default function Account() {
 					</span>
 					<span>{currentUser.displayName}</span>
 					<span
-						class="material-icons-outlined"
+						className="material-icons-outlined"
 						title="Logout"
 						onClick={logout}
 					>

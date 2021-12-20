@@ -10,7 +10,7 @@ export default function Video({ title, id, noq }) {
 			<p>{title}</p>
 			<div className={classes.qmeta}>
 				<p>{noq} Questions</p>
-				<p>total score : {noq * 5} </p>
+				<p>Total Score : {noq * 5} </p>
 			</div>
 		</div>
 	);

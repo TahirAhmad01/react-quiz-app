@@ -32,7 +32,7 @@ function App() {
 							<Quiz />
 						</PrivetRoute>
 
-						<PrivetRoute exact path="/result">
+						<PrivetRoute exact path="/result/:id">
 							<Result />
 						</PrivetRoute>
 					</Switch>

@@ -60,7 +60,6 @@ export default function Quiz() {
 		if (currentQuestion + 1 < questions.length) {
 			setCurrentQuestion((prevCurrent) => prevCurrent + 1);
 		}
-		console.log("clicked next");
 	}
 
 	// handle when user clicks the prev button to get back to the previous question
@@ -97,13 +96,22 @@ export default function Quiz() {
 
 	return (
 		<>
-			{loading && <div>Loading ...</div>}
-			{error && <div>There was an error!</div>}
+			{loading && (
+				<div className="ds_center">
+					<div className="loader"></div>
+				</div>
+			)}
+			{error && (
+				<div className="center">
+					<p className="error">There was an error!</p>
+				</div>
+			)}
 			{!loading && !error && qna && qna.length > 0 && (
 				<>
 					<h1>{qna[currentQuestion].title}</h1>
 					<h4>Question can have multiple answers</h4>
 					<Answers
+						input
 						options={qna[currentQuestion].options}
 						handleChange={handleAnswerChange}
 					/>

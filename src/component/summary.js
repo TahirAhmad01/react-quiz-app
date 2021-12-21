@@ -1,18 +1,19 @@
-import success from "../assests/images/success.png";
+import image from "../assests/images/success.png";
 import classes from "../styles/summary.module.css";
 
-export default function Summary() {
-  return (
-    <div className={classes.summary}>
-      <div className={classes.point}>
-        <p className={classes.score}>
-          Your score is <br />5 out of 10
-        </p>
-      </div>
+export default function Summary({ score, noq }) {
+	return (
+		<div className={classes.summary}>
+			<div className={classes.point}>
+				<p className={classes.score}>
+					Your score is <br />
+					{score} out of {noq * 5}
+				</p>
+			</div>
 
-      <div class={classes.badge}>
-        <img src={success} alt="Success" />
-      </div>
-    </div>
-  );
+			<div className={classes.badge}>
+				<img src={image} alt="Success" />
+			</div>
+		</div>
+	);
 }

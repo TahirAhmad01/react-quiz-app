@@ -40,8 +40,16 @@ export default function Videos() {
 					)}
 				</InfiniteScroll>
 			)}
-			{!loading && videos.length === 0 && <div>No data found!</div>}
-			{error && <div>There was an error!</div>}
+			{!loading && !error && videos.length === 0 && (
+				<div className="center">
+					<p className="error">No data found!</p>
+				</div>
+			)}
+			{error && (
+				<div className="center">
+					<p className="error">There was an error!</p>
+				</div>
+			)}
 			{loading && (
 				<div className="ds_center">
 					<div className="loader"></div>

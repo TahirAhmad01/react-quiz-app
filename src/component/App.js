@@ -28,7 +28,7 @@ function App() {
 							<Signup />
 						</PublicRoute>
 
-						<PrivetRoute exact path="/quiz">
+						<PrivetRoute exact path="/quiz/:id">
 							<Quiz />
 						</PrivetRoute>
 

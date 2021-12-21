@@ -2,7 +2,6 @@ import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import useVideoList from "../hooks/useVideoList";
-import classes from "../styles/videos.module.css";
 import Video from "./video";
 
 export default function Videos() {
@@ -10,46 +9,44 @@ export default function Videos() {
 	const { loading, error, videos, hasMore } = useVideoList(page);
 
 	return (
-		<>
+		<div>
 			{videos.length > 0 && (
 				<InfiniteScroll
 					dataLength={videos.length}
 					hasMore={hasMore}
+					loader={<div> loading.... </div>}
 					next={() => setPage(page + 8)}
 				>
-					<div className={classes.videos}>
-						{videos.map((video) =>
-							video.noq > 0 ? (
-								<Link to="/quiz" key={video.youtubeID}>
-									<Video
-										title={video.title}
-										id={video.youtubeID}
-										noq={video.noq}
-									/>
-								</Link>
-							) : (
+					{videos.map((video) =>
+						video.noq > 0 ? (
+							<Link
+								to={`/quiz/${video.youtubeID}`}
+								key={video.youtubeID}
+							>
 								<Video
 									title={video.title}
 									id={video.youtubeID}
 									noq={video.noq}
 								/>
-							)
-						)}
-					</div>
+							</Link>
+						) : (
+							<Video
+								title={video.title}
+								id={video.youtubeID}
+								noq={video.noq}
+								key={video.youtubeID}
+							/>
+						)
+					)}
 				</InfiniteScroll>
 			)}
-
-			{!loading && videos === 0 && (
-				<div className="error">No Data found</div>
-			)}
-
-			{error && <span className="error">There was an error!</span>}
-
+			{!loading && videos.length === 0 && <div>No data found!</div>}
+			{error && <div>There was an error!</div>}
 			{loading && (
 				<div className="ds_center">
 					<div className="loader"></div>
 				</div>
 			)}
-		</>
+		</div>
 	);
 }

@@ -64,14 +64,31 @@ h4 {
 }
 
 .loader {
-	border: 6px solid #f3f3f3;
+	border: 3px solid rgb(85, 85, 85);
 	border-radius: 50%;
-	border-top: 6px solid blue;
-	border-bottom: 6px solid blue;
+	border-bottom: 3px solid transparent;
 	width: 50px;
 	height: 50px;
-	-webkit-animation: spin 2s linear infinite;
-	animation: spin 2s linear infinite;
+	-webkit-animation: spin 1.5s linear infinite;
+	animation: spin 1.5s linear infinite;
+	text-align: center;
+}
+
+.infinite-scroll-component {
+	width: 100%;
+	display: grid;
+	margin: 1rem auto;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	justify-items: center;
+	gap: 20px;
+	height: 100%;
+	row-gap: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+	.infinite-scroll-component {
+		width: 90%;
+	}
 }
 
 @-webkit-keyframes spin {

@@ -84,7 +84,7 @@ export default function SignupForm() {
 			/>
 
 			<Button disabled={loading} type="submit">
-				<span>Submit Now</span>
+				{loading ? <div className="loader ld_mini"></div> : <span>Submit Now</span>}
 			</Button>
 
 			{error && <p className="error">{error}</p>}

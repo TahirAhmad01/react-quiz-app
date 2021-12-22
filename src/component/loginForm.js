@@ -51,8 +51,8 @@ export default function LoginForm() {
 				onChange={(e) => setPassword(e.target.value)}
 			></TextInput>
 
-			<Button disabled={loading} type="submit">
-				<span>Submit Now</span>
+			<Button disabled={loading} type="submit">			
+				{loading ? <div className="loader ld_mini"></div> : <span>Submit Now</span>}
 			</Button>
 
 			{error && <p className="error">{error}</p>}

@@ -61,6 +61,14 @@
 	}
 }
 
+@media only screen and (max-width: 400px){
+	.miniPlayer {
+		width: calc(100% - 60px);
+		bottom: 100px;
+		right: 30px;
+	}
+}
+
 .floatingBtn {
 	width: 60px;
 	height: 60px;

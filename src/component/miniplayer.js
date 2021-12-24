@@ -35,7 +35,7 @@ export default function MiniPlayer({ id, title }) {
 			<ReactPlayer
 				className={classes.player}
 				url={vidoUrl}
-				width="300px"
+				width="100%"
 				height="auto"
 				playing={status}
 				controls

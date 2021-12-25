@@ -7,14 +7,24 @@ import Form from "./form";
 import TextInput from "./textinput";
 
 export default function SignupForm() {
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
-	const [agree, setAgree] = useState("");
+	const [values, setValues] =useState({
+		username : "",
+		email: "",
+		password: "",
+		confirmPassword: "",
+		error: "",
+		loading: false,
+	});
 
-	const [error, setError] = useState();
-	const [loading, setLoading] = useState();
+
+	const handleChange = (e) => {
+		const value= e.target.value;
+		const name = e.target.name;
+		setValues({...values, [name]: value })
+
+	}
+
+	const [agree, setAgree] = useState("");
 
 	const { signup } = useAuth();
 	const history = useHistory();
@@ -22,19 +32,27 @@ export default function SignupForm() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		// do validation
-		if (password !== confirmPassword) {
-			return setError("Passwords don't match!");
+		if (values.password !== values.confirmPassword) {
+			return setValues({
+				...values,
+				error: "Passwords don't match!"
+			})
 		}
 
 		try {
-			setError("");
-			setLoading(true);
-			await signup(email, password, username);
+			setValues({
+				...values,
+				loading: true,
+				error: ""
+			})
+			await signup(values.email, values.password, values.username);
 			history.push("/");
 		} catch (err) {
-			console.log(err);
-			setLoading(false);
-			setError("Failed to create an account!");
+			setValues({
+				...values,
+				loading: false,
+				error: "Failed to create an account!"
+			})
 		}
 	}
 
@@ -45,8 +63,9 @@ export default function SignupForm() {
 				placeholder="Enter name"
 				icon="person"
 				required
-				value={username}
-				onChange={(e) => setUsername(e.target.value)}
+				value={values.username}
+				name="username"
+				onChange={handleChange}
 			/>
 
 			<TextInput
@@ -54,8 +73,9 @@ export default function SignupForm() {
 				required
 				placeholder="Enter email"
 				icon="alternate_email"
-				value={email}
-				onChange={(e) => setEmail(e.target.value)}
+				value={values.email}
+				name="email"
+				onChange={handleChange}
 			/>
 
 			<TextInput
@@ -63,8 +83,9 @@ export default function SignupForm() {
 				required
 				placeholder="Enter password"
 				icon="lock"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
+				value={values.password}
+				name="password"
+				onChange={handleChange}
 			/>
 
 			<TextInput
@@ -72,22 +93,24 @@ export default function SignupForm() {
 				required
 				placeholder="Confirm password"
 				icon="lock_clock"
-				value={confirmPassword}
-				onChange={(e) => setConfirmPassword(e.target.value)}
+				value={values.confirmPassword}
+				name="confirmPassword"
+				onChange={handleChange}
 			/>
 
 			<Checkbox
 				required
 				text="I agree to the Terms &amp; Conditions"
 				value={agree}
+				name="agree"
 				onChange={(e) => setAgree(e.target.value)}
 			/>
 
-			<Button disabled={loading} type="submit">
-				{loading ? <div className="loader ld_mini"></div> : <span>Submit Now</span>}
+			<Button disabled={values.loading} type="submit">
+				{values.loading ? <div className="loader ld_mini"></div> : <span>Submit Now</span>}
 			</Button>
 
-			{error && <p className="error">{error}</p>}
+			{values.error && <p className="error">{values.error}</p>}
 
 			<div className="info">
 				Already have an account? <Link to="/login">Login</Link> instead.

@@ -7,11 +7,18 @@ import Form from "./form";
 import TextInput from "./textinput";
 
 export default function LoginForm() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-
-	const [error, setError] = useState();
-	const [loading, setLoading] = useState();
+	const [values, setValues] = useState({
+		email: "",
+		password: "",
+		error: "",
+		loading: false,
+	})
+	
+	const handleChange = (e) => {
+		const value= e.target.value;
+		const name= e.target.name;
+		setValues({...values, [name]: value})
+	}
 
 	const { login } = useAuth();
 	const history = useHistory();
@@ -20,14 +27,19 @@ export default function LoginForm() {
 		e.preventDefault();
 
 		try {
-			setError("");
-			setLoading(true);
-			await login(email, password);
+			setValues({
+				...values,
+				error: "",
+				loading: true,
+			})
+			await login(values.email, values.password);
 			history.push("/");
-		} catch (err) {
-			console.log(err);
-			setLoading(false);
-			setError("Failed to login!");
+		} catch (err) {;
+			setValues({
+				...values,
+				error: "Failed to login!",
+				loading: false,
+			})
 		}
 	}
 
@@ -38,8 +50,9 @@ export default function LoginForm() {
 				placeholder="Enter email"
 				icon="alternate_email"
 				required
-				value={email}
-				onChange={(e) => setEmail(e.target.value)}
+				value={values.email}
+				onChange={handleChange}
+				name="email"
 			></TextInput>
 
 			<TextInput
@@ -47,15 +60,16 @@ export default function LoginForm() {
 				placeholder="Enter password"
 				icon="lock"
 				required
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
+				value={values.password}
+				onChange={handleChange}
+				name="password"
 			></TextInput>
 
-			<Button disabled={loading} type="submit">			
-				{loading ? <div className="loader ld_mini"></div> : <span>Submit Now</span>}
+			<Button disabled={values.loading} type="submit">			
+				{values.loading ? <div className="loader ld_mini"></div> : <span>Submit Now</span>}
 			</Button>
 
-			{error && <p className="error">{error}</p>}
+			{values.error && <p className="error">{values.error}</p>}
 
 			<div className="info">
 				Don't have an account? <Link to="/signup">Signup</Link> instead.

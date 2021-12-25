@@ -1,14 +1,21 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import useVideoList from "../hooks/useVideoList";
 import Video from "./video";
+
+const TITLE = 'Quiz videos'
 
 export default function Videos() {
 	const [page, setPage] = useState(1);
 	const { loading, error, videos, hasMore } = useVideoList(page);
 
 	return (
+		<>
+		<Helmet>
+          <title>{ TITLE }</title>
+        </Helmet>
 		<div>
 			{videos.length > 0 && (
 				<InfiniteScroll
@@ -61,5 +68,6 @@ export default function Videos() {
 				</div>
 			)}
 		</div>
+		</>
 	);
 }
